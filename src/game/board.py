@@ -34,9 +34,8 @@ class Board:
                 self.record[current_state] += 1
         else:
             self.record[current_state] = 1  
-        print(self)
-        self.checkWin(icon)
         self.checkWin('O' if icon == 'X' else 'X')
+        self.checkWin(icon)
 
     def checkWin(self, icon: str):
         b = (self.board == icon)

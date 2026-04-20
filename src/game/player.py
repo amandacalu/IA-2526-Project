@@ -2,34 +2,19 @@ from src.game.board import Board
 
 class Player:
 
-    def __init__(self, isX: bool, isHuman: bool):
+    def __init__(self, isX: bool, type: str):
         self.isX = isX
-        self.isHuman = isHuman
+        self.type = type
 
-    def turn(self, board: Board):
-        print(f"{self}'s turn")
-        if self.isHuman:
-            while True:
-                toParse = input("Enter move coordinates: ").split(",")
-                if (board.empty == 0 and len(toParse) == 0 and toParse[0] == "tie"):
-                    board.state = "Game ends on a tie!"
+    def getPossibleMoves(self, board: Board):
+        if (board.empty == 0):
+            return ["tie"]
+        moves = []
+        for i in range(1, 8):
+            if (board.board[5][i - 1] == 'X' and self.isX) or (board.board[5][i - 1] == 'O' and not self.isX):
+                moves.append((0, i))
+            for j in range(1, 7):
+                if board.board[6 - j][i - 1] == ' ':
+                    moves.append((j, i))
                     break
-                if len(toParse) != 2:
-                    print("Invalid move! Try again.")
-                    continue
-                move = tuple((int(toParse[0]), int(toParse[1])))
-                if move[0] not in range(0, 7) or move[1] not in range(1, 8):
-                    print("Invalid move! Try again.")
-                    continue
-                if board.isLegal(self.isX, move): # type: ignore
-                    board.playMove(str(self), move) # type: ignore
-                    break
-                else:
-                    print("Invalid move! Try again.")
-        else:
-            print(NotImplemented)
-
-    def __str__(self):
-        if self.isX:
-             return 'X'
-        return 'O'
+        return moves
