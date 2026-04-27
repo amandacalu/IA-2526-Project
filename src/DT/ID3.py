@@ -1,23 +1,3 @@
-
-# DT - Iris
-# 1) ler o dataset no pandas
-import pandas as pd #pandas para a manipulação de dados
-df = pd.read_csv("/home/amanux/4sem/ia/tp/IA-2526-Project/data/raw/iris.csv") #define o dataframe
-if 'ID' in df.columns:
-    df = df.drop('ID', axis=1)
-print(df.shape) #print de debugging para ver se o dataframe deu certo 
-colunas_atributos = ['sepallength', 'sepalwidth', 'petallength', 'petalwidth'] #define as variaveis independentes como todas menos class
-coluna_target = df['class'] #define a variavel target como class
-
-# 2) discretizar os dados de treino
-for col in colunas_atributos:
-    df[col] = pd.qcut(df[col], 3, labels=["Pequeno","Médio","Grande"]) #usa funçao 3cut do pyhton para dividir os valores em 3 'baldes']
-    #a função q cut 1)ordenas os valores em ordem crescente 2)divide por n partes iguais (3 nesse caso) 3)atribue as labels definidas nos respectivos intervalos
-
-X = df.drop('class', axis=1) #pega a discretizaçao acima e atribui a X (tudo menos 'class')
-y = coluna_target #pega 'class'
-
-
 # 3) implementar e aplicar ID3
 import numpy as np #importa numpy para calculos precisos matematicos
 
@@ -70,21 +50,21 @@ def my_ID3(Examples,X,y):
             tree[A][valor] = my_ID3(subset,novos_X,novo_y) #chama recursivamente a funçao para os novos valores
     return tree
 
-#3.4)Aplicando ID3 nas iris
-DT_final = my_ID3(df,X,y)
-import json
-print(json.dumps(DT_final, indent=4))
+#3.4) define classifcador com o ID3
+def classificador(exemplo,arvore):
+    if not isinstance(arvore,dict): #se a arvore nao der um dict, chegamos em uma folha
+        return arvore
+    
+    atributo = list(arvore.keys())[0] #pega o atributo que está no no da arvore
+    valor_exemplo = exemplo[atributo] #pega o valor q o exemplo tem paar esse atributo
+
+    if valor_exemplo in arvore[atributo]: #segue pelo ramo correspondente
+        sub_arvore = arvore[atributo][valor_exemplo]
+        return classificador(exemplo, sub_arvore)
+    else: #caso o valor nao existe - !!!(talvez posso duar aqui para retornar a moda)!!!
+        return "Classe Desconhecida"
+
             
-    
-
-
-        
-        
-
-
-
-
-    
 # 4) usar randomit para gerar um novo data set de teste
 # 5) analise e plotagem com matplot e seaborn
 
