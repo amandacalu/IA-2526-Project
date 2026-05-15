@@ -6,18 +6,34 @@ class Player: #cria uma classe chamada 'Player'
     def __init__(self, isX: bool): #inicia um player - 'X' = MAX
         self.isX = isX
 
-    def getPossibleMoves(self, board): #função que retorna possíveis jogadas
-        if (board.empty == 0):
-            return ["tie"]
-        moves = []
-        for i in range(1, 8):
-            if (board.board[5][i - 1] == 'X' and self.isX) or (board.board[5][i - 1] == 'O' and not self.isX):
-                moves.append((0, i))
-            for j in range(1, 7):
-                if board.board[6 - j][i - 1] == ' ':
-                    moves.append((j, i))
-                    break
-        return moves
+        def getPossibleMoves(self, board):
+            moves = []
+            
+            # 1. Verifica Pop Moves (Sempre avalia a linha inferior)
+            for i in range(1, 8):
+                if (board.board[5][i - 1] == 'X' and self.isX) or (board.board[5][i - 1] == 'O' and not self.isX):
+                    moves.append((0, i))
+                    
+            # 2. Verifica Drop Moves (Apenas se houver espaço vazio)
+            if board.empty > 0:
+                for i in range(1, 8):
+                    for j in range(1, 7):
+                        if board.board[6 - j][i - 1] == ' ':
+                            moves.append((j, i))
+                            break
+            
+            # 3. Regra do Tabuleiro Cheio
+            # Se encheu, o jogador TEM a opção de declarar empate,
+            # concorrendo com as opções de Pop (se ele tiver peças na base)
+            if board.empty == 0:
+                moves.append("tie") 
+                
+            # Tratamento de segurança extremo: se não tem espaço e não tem pop
+            if len(moves) == 0:
+                moves.append("tie")
+                
+            return moves
+
 
     def turn(self, board, printer=True): 
         

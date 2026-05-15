@@ -18,6 +18,9 @@ class Board: #cria uma classe chamada 'Board'
         return (self.board[7 - r, c] != ' ' and self.board[6 - r, c] == ' ')
     
     def playMove(self, icon: str, move: tuple[int, int]): #função que efetiva jogada (se valida)
+        if move == "tie":
+            self.state = "Game ends on a tie!"
+            return
         r, c = move[0], move[1] - 1
         if r == 0:
             self.board[1:, c] = self.board[:-1, c]
@@ -36,6 +39,7 @@ class Board: #cria uma classe chamada 'Board'
             self.record[current_state] = 1  
         self.checkWin('O' if icon == 'X' else 'X')
         self.checkWin(icon)
+
 
     def checkWin(self, icon: str): #função que checka se houve vitória
         b = (self.board == icon)
