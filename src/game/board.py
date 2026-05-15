@@ -1,15 +1,15 @@
+################## classe tabuleiro #############################
 import numpy as np
+class Board: #cria uma classe chamada 'Board'
 
-class Board:
+    def __init__(self): #função que inicia o tabuleiro
+        self.board = np.full((6, 7), ' ', dtype=str) #cria um tabuleiro de 7 colunas e 6 linhas
+        self.empty = 42 #define se está vazio - são 42 slots (7x6)
+        self.record = dict() #guarda estado num dicionario
+        self.record[repr(self)] = 1 #marca que o estado ocorreu
+        self.state = ' ' 
 
-    def __init__(self):
-        self.board = np.full((6, 7), ' ', dtype=str)
-        self.empty = 42
-        self.record = dict()
-        self.record[repr(self)] = 1
-        self.state = ' '
-
-    def isLegal(self, isX: bool, move: tuple[int, int]):
+    def isLegal(self, isX: bool, move: tuple[int, int]): #função que garante que as jogadas são validas
         r, c = move[0], move[1] - 1
         if r == 0:
             return ((isX and self.board[5, c] == 'X') or (not isX and self.board[5, c] == 'O'))
@@ -17,7 +17,7 @@ class Board:
             return self.board[6 - r, c] == ' '
         return (self.board[7 - r, c] != ' ' and self.board[6 - r, c] == ' ')
     
-    def playMove(self, icon: str, move: tuple[int, int]):
+    def playMove(self, icon: str, move: tuple[int, int]): #função que efetiva jogada (se valida)
         r, c = move[0], move[1] - 1
         if r == 0:
             self.board[1:, c] = self.board[:-1, c]
@@ -37,7 +37,7 @@ class Board:
         self.checkWin('O' if icon == 'X' else 'X')
         self.checkWin(icon)
 
-    def checkWin(self, icon: str):
+    def checkWin(self, icon: str): #função que checka se houve vitória
         b = (self.board == icon)
         if np.any(b[:, :-3] & b[:, 1:-2] & b[:, 2:-1] & b[:, 3:]):
             self.state = f"Game ends on {icon}'s win!"
@@ -52,7 +52,7 @@ class Board:
             self.state = f"Game ends on {icon}'s win!"
             return
 
-    def __str__(self):
+    def __str__(self): #função que imprime estado
         printer = "  -----------------------------\n"
         for i in range(6):
             printer += f"{6 - i} |"
@@ -66,5 +66,5 @@ class Board:
         printer += "    1   2   3   4   5   6   7"
         return printer
     
-    def __repr__(self):
+    def __repr__(self): #função que efetiva estado
         return "".join(self.board.ravel())

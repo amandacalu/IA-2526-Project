@@ -1,6 +1,6 @@
 from src.game.board import Board
 from src.game.player import Player
-from src.ai.mcts import MCTSNode
+from game.mcts import MCTSNode
 import copy
 import math
 import pandas as pd
