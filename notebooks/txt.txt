@@ -1,0 +1,121 @@
+🚀 INICIANDO LOTE 1 (Primeiras 4 configurações)...
+
+--- [Iniciando] Torneio: MCTS 1 (Tudo Desligado) ---
+--- [Iniciando] Torneio: MCTS 2 (Só Smart) ---
+--- [Iniciando] Torneio: MCTS 3 (Só FPU) ---
+--- [Iniciando] Torneio: MCTS 4 (FPU + Smart) ---
+
+==================================================
+✅ Placar Final - MCTS 1 (Tudo Desligado) (167.99 min):
+  🏆 Vitórias do Buffado: 118/200
+  💀 Vitórias do Clássico: 82/200
+  🤝 Empates: 0/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 3 (Só FPU) (171.07 min):
+  🏆 Vitórias do Buffado: 95/200
+  💀 Vitórias do Clássico: 105/200
+  🤝 Empates: 0/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 4 (FPU + Smart) (184.73 min):
+  🏆 Vitórias do Buffado: 107/200
+  💀 Vitórias do Clássico: 89/200
+  🤝 Empates: 4/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 2 (Só Smart) (186.36 min):
+  🏆 Vitórias do Buffado: 99/200
+  💀 Vitórias do Clássico: 97/200
+  🤝 Empates: 4/200
+==================================================
+
+
+🚀 LOTE 1 CONCLUÍDO! INICIANDO LOTE 2 (Últimas 4 configurações)...
+
+--- [Iniciando] Torneio: MCTS 5 (Só Bias) ---
+--- [Iniciando] Torneio: MCTS 6 (Bias + Smart) ---
+--- [Iniciando] Torneio: MCTS 7 (Bias + FPU) ---
+--- [Iniciando] Torneio: MCTS 8 (Tudo Ligado) ---
+
+==================================================
+✅ Placar Final - MCTS 7 (Bias + FPU) (133.49 min):
+  🏆 Vitórias do Buffado: 106/200
+  💀 Vitórias do Clássico: 94/200
+  🤝 Empates: 0/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 5 (Só Bias) (139.30 min):
+  🏆 Vitórias do Buffado: 83/200
+  💀 Vitórias do Clássico: 117/200
+  🤝 Empates: 0/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 6 (Bias + Smart) (150.82 min):
+  🏆 Vitórias do Buffado: 103/200
+  💀 Vitórias do Clássico: 93/200
+  🤝 Empates: 4/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 8 (Tudo Ligado) (161.56 min):
+  🏆 Vitórias do Buffado: 92/200
+  💀 Vitórias do Clássico: 104/200
+  🤝 Empates: 4/200
+==================================================
+
+
+🏁 TODOS OS TORNEIOS FORAM CONCLUÍDOS COM SUCESSO!
+
+
+🚀 INICIANDO TORNEIO (4 Configurações Simultâneas)...
+
+--- [Iniciando] Torneio: MCTS 4 (FPU + Smart) ---
+--- [Iniciando] Torneio: MCTS 6 (Bias + Smart) ---
+--- [Iniciando] Torneio: MCTS 7 (Bias + FPU) ---
+--- [Iniciando] Torneio: MCTS 8 (Tudo Ligado) ---
+
+==================================================
+✅ Placar Final - MCTS 7 (Bias + FPU) (129.44 min):
+  🏆 Vitórias do Buffado: 105/200
+  💀 Vitórias do Clássico: 94/200
+  🤝 Empates: 1/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 8 (Tudo Ligado) (150.85 min):
+  🏆 Vitórias do Buffado: 102/200
+  💀 Vitórias do Clássico: 94/200
+  🤝 Empates: 4/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 4 (FPU + Smart) (156.06 min):
+  🏆 Vitórias do Buffado: 104/200
+  💀 Vitórias do Clássico: 91/200
+  🤝 Empates: 5/200
+==================================================
+
+
+==================================================
+✅ Placar Final - MCTS 6 (Bias + Smart) (157.46 min):
+  🏆 Vitórias do Buffado: 97/200
+  💀 Vitórias do Clássico: 99/200
+  🤝 Empates: 4/200
+==================================================
+
+
+🏁 TODOS OS TORNEIOS FORAM CONCLUÍDOS COM SUCESSO!
