@@ -1,0 +1,426 @@
+Primeiro Teste{
+    10k iterações, 200 jogos, heurísticas diversas
+    🚀 INICIANDO LOTE 1 (Primeiras 4 configurações)...
+
+    --- [Iniciando] Torneio: MCTS 1 (Tudo Desligado) ---
+    --- [Iniciando] Torneio: MCTS 2 (Só Smart) ---
+    --- [Iniciando] Torneio: MCTS 3 (Só FPU) ---
+    --- [Iniciando] Torneio: MCTS 4 (FPU + Smart) ---
+
+    ==================================================
+    ✅ Placar Final - MCTS 1 (Tudo Desligado) (167.99 min):
+      🏆 Vitórias do Buffado: 118/200
+      💀 Vitórias do Clássico: 82/200
+      🤝 Empates: 0/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 3 (Só FPU) (171.07 min):
+      🏆 Vitórias do Buffado: 95/200
+      💀 Vitórias do Clássico: 105/200
+      🤝 Empates: 0/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 4 (FPU + Smart) (184.73 min):
+      🏆 Vitórias do Buffado: 107/200
+      💀 Vitórias do Clássico: 89/200
+      🤝 Empates: 4/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 2 (Só Smart) (186.36 min):
+      🏆 Vitórias do Buffado: 99/200
+      💀 Vitórias do Clássico: 97/200
+      🤝 Empates: 4/200
+    ==================================================
+
+
+    🚀 LOTE 1 CONCLUÍDO! INICIANDO LOTE 2 (Últimas 4 configurações)...
+
+    --- [Iniciando] Torneio: MCTS 5 (Só Bias) ---
+    --- [Iniciando] Torneio: MCTS 6 (Bias + Smart) ---
+    --- [Iniciando] Torneio: MCTS 7 (Bias + FPU) ---
+    --- [Iniciando] Torneio: MCTS 8 (Tudo Ligado) ---
+
+    ==================================================
+    ✅ Placar Final - MCTS 7 (Bias + FPU) (133.49 min):
+      🏆 Vitórias do Buffado: 106/200
+      💀 Vitórias do Clássico: 94/200
+      🤝 Empates: 0/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 5 (Só Bias) (139.30 min):
+      🏆 Vitórias do Buffado: 83/200
+      💀 Vitórias do Clássico: 117/200
+      🤝 Empates: 0/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 6 (Bias + Smart) (150.82 min):
+      🏆 Vitórias do Buffado: 103/200
+      💀 Vitórias do Clássico: 93/200
+      🤝 Empates: 4/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 8 (Tudo Ligado) (161.56 min):
+      🏆 Vitórias do Buffado: 92/200
+      💀 Vitórias do Clássico: 104/200
+      🤝 Empates: 4/200
+    ==================================================
+
+
+    🏁 TODOS OS TORNEIOS FORAM CONCLUÍDOS COM SUCESSO!
+}
+
+Segundo Teste{
+    10k iterações, 200 jogos, heurísticas refinadas:
+    🚀 INICIANDO TORNEIO (4 Configurações Simultâneas)...
+
+    --- [Iniciando] Torneio: MCTS 4 (FPU + Smart) ---
+    --- [Iniciando] Torneio: MCTS 6 (Bias + Smart) ---
+    --- [Iniciando] Torneio: MCTS 7 (Bias + FPU) ---
+    --- [Iniciando] Torneio: MCTS 8 (Tudo Ligado) ---
+
+    ==================================================
+    ✅ Placar Final - MCTS 7 (Bias + FPU) (129.44 min):
+      🏆 Vitórias do Buffado: 105/200
+      💀 Vitórias do Clássico: 94/200
+      🤝 Empates: 1/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 8 (Tudo Ligado) (150.85 min):
+      🏆 Vitórias do Buffado: 102/200
+      💀 Vitórias do Clássico: 94/200
+      🤝 Empates: 4/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 4 (FPU + Smart) (156.06 min):
+      🏆 Vitórias do Buffado: 104/200
+      💀 Vitórias do Clássico: 91/200
+      🤝 Empates: 5/200
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - MCTS 6 (Bias + Smart) (157.46 min):
+      🏆 Vitórias do Buffado: 97/200
+      💀 Vitórias do Clássico: 99/200
+      🤝 Empates: 4/200
+    ==================================================
+
+
+    🏁 TODOS OS TORNEIOS FORAM CONCLUÍDOS COM SUCESSO!
+}
+
+Terceiro Teste{
+    🚀 INICIANDO LOTE 1 (Primeiras 4 configurações)...
+
+    --- [Iniciando] Torneio: Buffado (5 filhos) - 500 iter ---
+    --- [Iniciando] Torneio: Buffado (5 filhos) - 1000 iter ---
+    --- [Iniciando] Torneio: Buffado (5 filhos) - 2000 iter ---
+    --- [Iniciando] Torneio: Buffado (5 filhos) - 3000 iter ---
+
+    ==================================================
+    ✅ Placar Final - Buffado (5 filhos) - 500 iter (31.64 min):
+      🏆 Vitórias do Buffado: 17/100
+      💀 Vitórias do Clássico: 82/100
+      🤝 Empates: 1/100
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - Buffado (5 filhos) - 1000 iter (34.35 min):
+      🏆 Vitórias do Buffado: 20/100
+      💀 Vitórias do Clássico: 80/100
+      🤝 Empates: 0/100
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - Buffado (5 filhos) - 2000 iter (36.83 min):
+      🏆 Vitórias do Buffado: 26/100
+      💀 Vitórias do Clássico: 74/100
+      🤝 Empates: 0/100
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - Buffado (5 filhos) - 3000 iter (41.29 min):
+      🏆 Vitórias do Buffado: 37/100
+      💀 Vitórias do Clássico: 63/100
+      🤝 Empates: 0/100
+    ==================================================
+
+
+    🚀 LOTE 1 CONCLUÍDO! INICIANDO LOTE 2 (Últimas 4 configurações)...
+
+    --- [Iniciando] Torneio: Buffado (8 filhos) - 1000 iter ---
+    --- [Iniciando] Torneio: Buffado (8 filhos) - 2000 iter ---
+    --- [Iniciando] Torneio: Buffado (8 filhos) - 3000 iter ---
+    --- [Iniciando] Torneio: Buffado (8 filhos) - 5000 iter ---
+
+    ==================================================
+    ✅ Placar Final - Buffado (8 filhos) - 1000 iter (34.29 min):
+      🏆 Vitórias do Buffado: 21/100
+      💀 Vitórias do Clássico: 78/100
+      🤝 Empates: 1/100
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - Buffado (8 filhos) - 2000 iter (35.01 min):
+      🏆 Vitórias do Buffado: 34/100
+      💀 Vitórias do Clássico: 66/100
+      🤝 Empates: 0/100
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - Buffado (8 filhos) - 3000 iter (41.80 min):
+      🏆 Vitórias do Buffado: 31/100
+      💀 Vitórias do Clássico: 67/100
+      🤝 Empates: 2/100
+    ==================================================
+
+
+    ==================================================
+    ✅ Placar Final - Buffado (8 filhos) - 5000 iter (46.57 min):
+      🏆 Vitórias do Buffado: 33/100
+      💀 Vitórias do Clássico: 66/100
+      🤝 Empates: 1/100
+    ==================================================
+
+
+    🏁 TODOS OS TORNEIOS FORAM CONCLUÍDOS COM SUCESSO!
+
+    
+  ==================================================
+  ✅ Placar Final - Buffado (5 filhos) - 4000 iter (49.15 min):
+    🏆 Vitórias do Buffado: 40/100
+    💀 Vitórias do Clássico: 59/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 40.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (5 filhos) - 5000 iter (51.25 min):
+    🏆 Vitórias do Buffado: 42/100
+    💀 Vitórias do Clássico: 57/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 42.0% 
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (5 filhos) - 6000 iter (54.17 min):
+    🏆 Vitórias do Buffado: 43/100
+    💀 Vitórias do Clássico: 56/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 43.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (5 filhos) - 7000 iter (56.58 min):
+    🏆 Vitórias do Buffado: 37/100
+    💀 Vitórias do Clássico: 63/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 37.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 6000 iter (49.92 min):
+    🏆 Vitórias do Buffado: 42/100
+    💀 Vitórias do Clássico: 57/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 42.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 5000 iter (50.49 min):
+    🏆 Vitórias do Buffado: 37/100
+    💀 Vitórias do Clássico: 63/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 37.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 7000 iter (52.05 min):
+    🏆 Vitórias do Buffado: 42/100
+    💀 Vitórias do Clássico: 58/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 42.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 8000 iter (54.71 min):
+    🏆 Vitórias do Buffado: 49/100
+    💀 Vitórias do Clássico: 50/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 49.0%  
+    🔄 Jogos:   100
+  ==================================================
+
+  
+  ==================================================
+  ✅ Placar Final - Buffado (7 filhos) - 5000 iter (54.24 min):
+    🏆 Vitórias do Buffado: 34/100
+    💀 Vitórias do Clássico: 64/100
+    🤝 Empates: 2/100
+    🎯 WinRate: 34.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 8000 iter (60.12 min):
+    🏆 Vitórias do Buffado: 40/100
+    💀 Vitórias do Clássico: 58/100
+    🤝 Empates: 2/100
+    🎯 WinRate: 40.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 9000 iter (61.99 min):
+    🏆 Vitórias do Buffado: 45/100
+    💀 Vitórias do Clássico: 53/100
+    🤝 Empates: 2/100
+    🎯 WinRate: 45.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (6 filhos) - 10000 iter (67.92 min):
+    🏆 Vitórias do Buffado: 34/100
+    💀 Vitórias do Clássico: 66/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 34.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (7 filhos) - 7000 iter (53.99 min):
+    🏆 Vitórias do Buffado: 33/100
+    💀 Vitórias do Clássico: 67/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 33.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (7 filhos) - 6000 iter (56.01 min):
+    🏆 Vitórias do Buffado: 35/100
+    💀 Vitórias do Clássico: 63/100
+    🤝 Empates: 2/100
+    🎯 WinRate: 35.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (7 filhos) - 8000 iter (63.13 min):
+    🏆 Vitórias do Buffado: 39/100
+    💀 Vitórias do Clássico: 60/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 39.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (7 filhos) - 9000 iter (65.29 min):
+    🏆 Vitórias do Buffado: 45/100
+    💀 Vitórias do Clássico: 54/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 45.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 5000 iter (53.25 min):
+    🏆 Vitórias do Buffado: 41/100
+    💀 Vitórias do Clássico: 59/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 41.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 6000 iter (59.44 min):
+    🏆 Vitórias do Buffado: 37/100
+    💀 Vitórias do Clássico: 62/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 37.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 7000 iter (59.86 min):
+    🏆 Vitórias do Buffado: 37/100
+    💀 Vitórias do Clássico: 63/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 37.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 8000 iter (62.10 min):
+    🏆 Vitórias do Buffado: 46/100
+    💀 Vitórias do Clássico: 52/100
+    🤝 Empates: 2/100
+    🎯 WinRate: 46.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 8000 iter (62.03 min):
+    🏆 Vitórias do Buffado: 39/100
+    💀 Vitórias do Clássico: 60/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 39.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 9000 iter (70.92 min):
+    🏆 Vitórias do Buffado: 31/100
+    💀 Vitórias do Clássico: 69/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 31.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 10000 iter (71.86 min):
+    🏆 Vitórias do Buffado: 47/100
+    💀 Vitórias do Clássico: 53/100
+    🤝 Empates: 0/100
+    🎯 WinRate: 47.0%
+    🔄 Jogos:   100
+  ==================================================
+
+  ==================================================
+  ✅ Placar Final - Buffado (4 filhos) - 11000 iter (78.25 min):
+    🏆 Vitórias do Buffado: 42/100
+    💀 Vitórias do Clássico: 57/100
+    🤝 Empates: 1/100
+    🎯 WinRate: 42.0%
+    🔄 Jogos:   100
+  ==================================================
+}
