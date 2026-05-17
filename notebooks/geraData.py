@@ -419,28 +419,18 @@ class MCTSNodeBuffed(MCTSNode):
 
 
 
-import time
-import copy
-import csv
-import random
-import os
-import multiprocessing
-
 config_classico = {"bias": False, "fpu": False, "smart": False, "iter": 10000}
 config_bufado = {"bias": True, "fpu": True, "smart": True, "max_children": 6, "iter": 8000}
 
 
-# 1. Isolamos a lógica principal em uma função que recebe um "id"
 def trabalhador_dataset(id_processo, horas_limite):
     print(f"--- [Processo {id_processo}] Iniciando geração (Separando Vencedores e Perdedores) ---")
     
-    # Define os locais dos dois arquivos específicos para este processo
     caminho_vencedores = f'../data/raw/MCTS_Winners_data_{id_processo}.csv'
     caminho_perdedores = f'../data/raw/MCTS_Losers_data_{id_processo}.csv'
     
     os.makedirs(os.path.dirname(caminho_vencedores), exist_ok=True)
     
-    # Configuração dos jogadores
     if random.randint(0, 1) == 1:
         playerX = MCTSPlayer(isX=True, name="Clássico", config=config_classico)
         playerO = MCTSPlayer(isX=False, name="Buffado", config=config_bufado)
@@ -450,7 +440,6 @@ def trabalhador_dataset(id_processo, horas_limite):
     
     header = ["isX"] + [f"c{i}" for i in range(42)] + ["target"]
     
-    # Inicializa os dois arquivos com o cabeçalho
     with open(caminho_vencedores, 'w', newline='') as f_win, open(caminho_perdedores, 'w', newline='') as f_lose:
         writer_win = csv.writer(f_win)
         writer_lose = csv.writer(f_lose)
@@ -464,14 +453,12 @@ def trabalhador_dataset(id_processo, horas_limite):
     while time.time() - start_time < tempo_limite_segundos:
         board = Board()
         
-        # Listas separadas para as jogadas de cada jogador nesta partida
         moves_X = [] 
         moves_O = [] 
         
         while board.state == ' ':
             storedBoard = copy.deepcopy(board.board)
             
-            # --- TURNO DO X ---
             if board.empty > 38:
                 moves = playerX.getPossibleMoves(board)
                 move = random.choice(moves)
@@ -489,14 +476,13 @@ def trabalhador_dataset(id_processo, horas_limite):
                     else:
                         newRowX.append(0)
             newRowX.append(move)
-            moves_X.append(newRowX) # Salva apenas na lista do X
+            moves_X.append(newRowX)
             
             if board.state != ' ':
                 break
                 
             storedBoard = copy.deepcopy(board.board)
             
-            # --- TURNO DO O ---
             if board.empty > 38:
                 moves = playerO.getPossibleMoves(board)
                 move = random.choice(moves)
@@ -514,25 +500,19 @@ def trabalhador_dataset(id_processo, horas_limite):
                     else:
                         newRowO.append(0)
             newRowO.append(move)
-            moves_O.append(newRowO) # Salva apenas na lista do O
+            moves_O.append(newRowO)
             
-        # --- FIM DA PARTIDA: DISTRIBUIÇÃO DOS DADOS ---
-        # Verifica o estado final do tabuleiro para saber quem ganhou
         
         if "X's win" in board.state:
-            # X ganhou: Moves X vão para Vencedores, Moves O vão para Perdedores
             with open(caminho_vencedores, 'a', newline='') as f_win, open(caminho_perdedores, 'a', newline='') as f_lose:
                 csv.writer(f_win).writerows(moves_X)
                 csv.writer(f_lose).writerows(moves_O)
                 
         elif "O's win" in board.state:
-            # O ganhou: Moves O vão para Vencedores, Moves X vão para Perdedores
             with open(caminho_vencedores, 'a', newline='') as f_win, open(caminho_perdedores, 'a', newline='') as f_lose:
                 csv.writer(f_win).writerows(moves_O)
                 csv.writer(f_lose).writerows(moves_X)
                 
-        # Se for empate ("Game ends on a tie!"), os dados desta partida são descartados 
-        # para manter a pureza dos datasets de vitória/derrota.
             
         games_played += 1
         elapsed_time = time.time() - start_time
@@ -540,14 +520,10 @@ def trabalhador_dataset(id_processo, horas_limite):
 
     print(f"\n[Processo {id_processo}] Concluído!")
 
-# 2. A função principal que gerencia o paralelismo de forma dinâmica
 def gerar_datasets_paralelos(horas=7, num_processos=7):
     processos = []
     
-    # Criar e iniciar os processos num loop
     for i in range(num_processos):
-        # Gera IDs de 'A' até 'G' (ou além, dependendo do número de processos)
-        # chr(65) é 'A', chr(66) é 'B', etc.
         id_proc = chr(65 + i) 
         
         p = multiprocessing.Process(target=trabalhador_dataset, args=(id_proc, horas))
@@ -555,7 +531,6 @@ def gerar_datasets_paralelos(horas=7, num_processos=7):
         p.start()
         print(f"Processo {id_proc} iniciado.")
     
-    # Aguardar (join) todos os processos finalizarem
     for p in processos:
         p.join()
     
@@ -563,11 +538,9 @@ def gerar_datasets_paralelos(horas=7, num_processos=7):
 
 
 if __name__ == '__main__':
-    # 1. Importe a biblioteca caso não esteja no topo
     import multiprocessing 
     
-    # 2. FORCE O LINUX A USAR O METODO FORK
     multiprocessing.set_start_method('fork', force=True) 
     
-    # 3. Chama a função principal informando a duração (horas) e a quantidade de processos (7)
     gerar_datasets_paralelos(horas=17, num_processos=7)
+
