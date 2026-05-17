@@ -7,10 +7,10 @@ Estrutura do projeto:
 2) Notebooks:
 2.1) Notebooks/img: Contém as imagens utilizadas no relatório
 2.2) Notebook/plot: Contém funções auxiliares definidas para gerar gráficos ao relatório
-- final_submission.ipynb: Arquivo no formato Jupyter Notebook que contém o relatório final de acordo com assignment proposto
-# - arena.py: Arquivo python que contém o código para disputa de MCTSs
-# - geraData.py: Arquivo python que contém o código para gerar os datasets de dados de disputa dos MCTSs
-# -resultados_torneio.txt: Resultado das disputas entre diversos alterações de MTCSs para análise
+- **final_submission.ipynb**: Arquivo no formato Jupyter Notebook que contém o relatório final de acordo com assignment proposto
+- arena.py: Arquivo python que contém o código para disputa de MCTSs
+- geraData.py: Arquivo python que contém o código para gerar os datasets de dados de disputa dos MCTSs
+- resultados.txt: Resultado das disputas entre diversos alterações de MTCSs para análise
 
 3) Src:
 3.1) Src/DT: Contém código referente a Árvores de Decisão
@@ -26,3 +26,5 @@ Estrutura do projeto:
 4) IA_2526_Trab.pdf: Assignment com escopo do trabalho
 
 5) Slide_Apresentaçao.pdf: Pdf contendo slide para apresentação do trabalho
+
+6) IA_2526_GroupEvaluation_TP3_Group3: Arquivo em formato excel com a avaliação individual do projeto
