@@ -3,7 +3,7 @@ import math
 from random import choice
 import numpy as np
 import random
-import board, player
+import board
 ################# MCTS Classico ################################
 def mcts_base(rootBoard, isX: bool, iterations=10000, constant=1.41):
     
@@ -41,7 +41,8 @@ class MCTSNode:
         self.children = []
         self.wins = 0
         self.visits = 0
-        self.untriedMoves = MCTSPlayer(isX).getPossibleMoves(self.board)
+        from player import Player
+        self.untriedMoves = Player(isX).getPossibleMoves(self.board)
 
     def ucb1(self, child):
         """Calcula o valor UCB1 para um filho específico."""
@@ -161,44 +162,32 @@ class MCTSNode:
         if m & (m >> 16): return True
         return False
 ################ mcts modo buffado ###############
-def mcts_buffed(rootBoard, isX, iterations, bias, fpu, smart, pruning):
-    """
-    Função motor que aceita as flags individuais para cada heurística.
-    """
-    # Criamos o nó raiz passando as configurações para o nó buffado
+def mcts_buffed(rootBoard, isX, iterations, bias, fpu, smart, pruning, repetition=False):
     root = MCTSNodeBuffed(
         rootBoard, 
         isX=isX, 
         use_bias=bias, 
         use_fpu=fpu, 
         use_smart_rollout=smart, 
-        use_pruning=pruning
+        use_pruning=pruning,
+        use_repetition_check=repetition # Garanta que MCTSNodeBuffed aceita este argumento
     )
     
     for _ in range(iterations):
         node = root
-        
-        # Fase 1: Seleção
         while node.is_fully_expanded() and not node.is_terminal():
             node = node.select()
-            
-        # Fase 2: Expansão
         if not node.is_terminal():
             node = node.expand()
-            
-        # Fase 3: Simulação (Rollout)
         result = node.rollout()
-        
-        # Fase 4: Backpropagation
         node.update(result)
     
-    # Retorna o melhor movimento com base no número de visitas
     best_child = max(root.children, key=lambda c: c.visits)
     return best_child.move, best_child.move
 ############# no do mcts buffado - subclasse #############
 class MCTSNodeBuffed(MCTSNode):
     def __init__(self, board, move=None, parent=None, constant=1.41, isX=True, 
-                 use_bias=False, use_fpu=False, use_smart_rollout=False, use_pruning=False):
+                 use_bias=False, use_fpu=False, use_smart_rollout=False, use_pruning=False, use_repetition_check=False):
         super().__init__(board, move, parent, constant, isX)
         
         # Configurações Atômicas
@@ -206,6 +195,7 @@ class MCTSNodeBuffed(MCTSNode):
         self.use_fpu = use_fpu
         self.use_smart_rollout = use_smart_rollout
         self.use_pruning = use_pruning
+        self.use_repetition_check = use_repetition_check
         
         # Se Pruning estiver ativo, ordenamos os movimentos (Prioriza centro, depois Drop, depois Pop)
         if self.use_pruning:
@@ -280,3 +270,5 @@ class MCTSNodeBuffed(MCTSNode):
                                self.use_bias, self.use_fpu, self.use_smart_rollout, self.use_pruning)
         self.children.append(child)
         return child
+    
+  

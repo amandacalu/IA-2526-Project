@@ -1,4 +1,4 @@
-import board
+'''import board
 import player
 import mcts
 ############# humano vs humano ################
@@ -120,4 +120,4 @@ while board.state == ' ':
     print(board)
 
 print("\nRESULTADO:")
-print(board.state)
+print(board.state)'''

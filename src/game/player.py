@@ -1,38 +1,37 @@
-import board
-import mcts
+from board import Board 
 import numpy as np
 ####class player##################
 class Player: #cria uma classe chamada 'Player'
     def __init__(self, isX: bool): #inicia um player - 'X' = MAX
         self.isX = isX
 
-        def getPossibleMoves(self, board):
-            moves = []
-            
-            # 1. Verifica Pop Moves (Sempre avalia a linha inferior)
+    def getPossibleMoves(self, board):
+        moves = []
+        
+        # 1. Verifica Pop Moves (Sempre avalia a linha inferior)
+        for i in range(1, 8):
+            if (board.board[5][i - 1] == 'X' and self.isX) or (board.board[5][i - 1] == 'O' and not self.isX):
+                moves.append((0, i))
+                
+        # 2. Verifica Drop Moves (Apenas se houver espaço vazio)
+        if board.empty > 0:
             for i in range(1, 8):
-                if (board.board[5][i - 1] == 'X' and self.isX) or (board.board[5][i - 1] == 'O' and not self.isX):
-                    moves.append((0, i))
-                    
-            # 2. Verifica Drop Moves (Apenas se houver espaço vazio)
-            if board.empty > 0:
-                for i in range(1, 8):
-                    for j in range(1, 7):
-                        if board.board[6 - j][i - 1] == ' ':
-                            moves.append((j, i))
-                            break
+                for j in range(1, 7):
+                    if board.board[6 - j][i - 1] == ' ':
+                        moves.append((j, i))
+                        break
+        
+        # 3. Regra do Tabuleiro Cheio
+        # Se encheu, o jogador TEM a opção de declarar empate,
+        # concorrendo com as opções de Pop (se ele tiver peças na base)
+        if board.empty == 0:
+            moves.append("tie") 
             
-            # 3. Regra do Tabuleiro Cheio
-            # Se encheu, o jogador TEM a opção de declarar empate,
-            # concorrendo com as opções de Pop (se ele tiver peças na base)
-            if board.empty == 0:
-                moves.append("tie") 
-                
-            # Tratamento de segurança extremo: se não tem espaço e não tem pop
-            if len(moves) == 0:
-                moves.append("tie")
-                
-            return moves
+        # Tratamento de segurança extremo: se não tem espaço e não tem pop
+        if len(moves) == 0:
+            moves.append("tie")
+            
+        return moves
 
 
     def turn(self, board, printer=True): 
@@ -92,21 +91,29 @@ class MCTSPlayer(Player):
     def __init__(self, isX, name="Bot", config=None):
         super().__init__(isX)
         self.name = name
-        # Config padrão: tudo desligado (Clássico)
+        # Adicionamos "repetition" ao config padrão
         self.config = config if config else {
-            "bias": False, "fpu": False, "smart": False, "pruning": False, "iter": 5000
+            "bias": False, "fpu": False, "smart": False, 
+            "pruning": False, "repetition": False, "iter": 5000
         }
 
     def turn(self, board, printer=True):
-        if printer: print(f"[{self.name}] pensando com config: {self.config}")
+        if printer: 
+            print(f"[{self.name}] pensando com config: {self.config}")
         
-        # Chama a função mcts_buffed passando as flags da config
-        move = mcts_buffed(board, self.isX, 
-                           iterations=self.config.get("iter", 5000),
-                           bias=self.config["bias"],
-                           fpu=self.config["fpu"],
-                           smart=self.config["smart"],
-                           pruning=self.config["pruning"])
+        # Chamada corrigida: Importante usar mcts.mcts_buffed se estiver em ficheiros diferentes
+        # e passar a nova flag de repetição
+        import mcts 
+        move = mcts.mcts_buffed(
+            board, 
+            self.isX, 
+            iterations=self.config.get("iter", 5000),
+            bias=self.config.get("bias", False),
+            fpu=self.config.get("fpu", False),
+            smart=self.config.get("smart", False),
+            pruning=self.config.get("pruning", False),
+            repetition=self.config.get("repetition", False)
+        )
         
         board.playMove(str(self), move[0]) 
         return move[1]
