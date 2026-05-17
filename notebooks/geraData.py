@@ -432,14 +432,15 @@ config_bufado = {"bias": True, "fpu": True, "smart": True, "max_children": 6, "i
 
 # 1. Isolamos a lógica principal em uma função que recebe um "id"
 def trabalhador_dataset(id_processo, horas_limite):
-    print(f"--- [Processo {id_processo}] Iniciando geração (Aberturas Aleatórias) ---")
+    print(f"--- [Processo {id_processo}] Iniciando geração (Separando Vencedores e Perdedores) ---")
     
-    # Define o local do arquivo específico para este processo
-    caminho_arquivo = f'../data/raw/MCTS_Random_Opening_data2_{id_processo}.csv'
+    # Define os locais dos dois arquivos específicos para este processo
+    caminho_vencedores = f'../data/raw/MCTS_Winners_data_{id_processo}.csv'
+    caminho_perdedores = f'../data/raw/MCTS_Losers_data_{id_processo}.csv'
     
-    os.makedirs(os.path.dirname(caminho_arquivo), exist_ok=True)
+    os.makedirs(os.path.dirname(caminho_vencedores), exist_ok=True)
     
-    # OBS: Certifique-se de que as classes MCTSPlayer e Board estão importadas/definidas no seu arquivo real
+    # Configuração dos jogadores
     if random.randint(0, 1) == 1:
         playerX = MCTSPlayer(isX=True, name="Clássico", config=config_classico)
         playerO = MCTSPlayer(isX=False, name="Buffado", config=config_bufado)
@@ -448,9 +449,13 @@ def trabalhador_dataset(id_processo, horas_limite):
         playerO = MCTSPlayer(isX=False, name="Clássico", config=config_classico)
     
     header = ["isX"] + [f"c{i}" for i in range(42)] + ["target"]
-    with open(caminho_arquivo, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
+    
+    # Inicializa os dois arquivos com o cabeçalho
+    with open(caminho_vencedores, 'w', newline='') as f_win, open(caminho_perdedores, 'w', newline='') as f_lose:
+        writer_win = csv.writer(f_win)
+        writer_lose = csv.writer(f_lose)
+        writer_win.writerow(header)
+        writer_lose.writerow(header)
         
     start_time = time.time()
     tempo_limite_segundos = horas_limite * 60 * 60
@@ -458,12 +463,15 @@ def trabalhador_dataset(id_processo, horas_limite):
     
     while time.time() - start_time < tempo_limite_segundos:
         board = Board()
-        game_data = [] 
+        
+        # Listas separadas para as jogadas de cada jogador nesta partida
+        moves_X = [] 
+        moves_O = [] 
         
         while board.state == ' ':
             storedBoard = copy.deepcopy(board.board)
             
-            # --- ABERTURA ALEATÓRIA PARA O X ---
+            # --- TURNO DO X ---
             if board.empty > 38:
                 moves = playerX.getPossibleMoves(board)
                 move = random.choice(moves)
@@ -471,24 +479,24 @@ def trabalhador_dataset(id_processo, horas_limite):
             else:
                 move = playerX.turn(board, False)
             
-            newRow = [1]
+            newRowX = [1]
             for r in range(6): 
                 for c in range(7):
                     if storedBoard[r][c] == "X":
-                        newRow.append(1)
+                        newRowX.append(1)
                     elif storedBoard[r][c] == "O":
-                        newRow.append(-1)
+                        newRowX.append(-1)
                     else:
-                        newRow.append(0)
-            newRow.append(move)
-            game_data.append(newRow)
+                        newRowX.append(0)
+            newRowX.append(move)
+            moves_X.append(newRowX) # Salva apenas na lista do X
             
             if board.state != ' ':
                 break
                 
             storedBoard = copy.deepcopy(board.board)
             
-            # --- ABERTURA ALEATÓRIA PARA O O ---
+            # --- TURNO DO O ---
             if board.empty > 38:
                 moves = playerO.getPossibleMoves(board)
                 move = random.choice(moves)
@@ -496,29 +504,41 @@ def trabalhador_dataset(id_processo, horas_limite):
             else:
                 move = playerO.turn(board, False)
             
-            newRow = [0]
+            newRowO = [0]
             for r in range(6):
                 for c in range(7):
                     if storedBoard[r][c] == "O":
-                        newRow.append(-1)
+                        newRowO.append(-1)
                     elif storedBoard[r][c] == "X":
-                        newRow.append(1)
+                        newRowO.append(1)
                     else:
-                        newRow.append(0)
-            newRow.append(move)
-            game_data.append(newRow)
+                        newRowO.append(0)
+            newRowO.append(move)
+            moves_O.append(newRowO) # Salva apenas na lista do O
             
-        with open(caminho_arquivo, 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerows(game_data)
+        # --- FIM DA PARTIDA: DISTRIBUIÇÃO DOS DADOS ---
+        # Verifica o estado final do tabuleiro para saber quem ganhou
+        
+        if "X's win" in board.state:
+            # X ganhou: Moves X vão para Vencedores, Moves O vão para Perdedores
+            with open(caminho_vencedores, 'a', newline='') as f_win, open(caminho_perdedores, 'a', newline='') as f_lose:
+                csv.writer(f_win).writerows(moves_X)
+                csv.writer(f_lose).writerows(moves_O)
+                
+        elif "O's win" in board.state:
+            # O ganhou: Moves O vão para Vencedores, Moves X vão para Perdedores
+            with open(caminho_vencedores, 'a', newline='') as f_win, open(caminho_perdedores, 'a', newline='') as f_lose:
+                csv.writer(f_win).writerows(moves_O)
+                csv.writer(f_lose).writerows(moves_X)
+                
+        # Se for empate ("Game ends on a tie!"), os dados desta partida são descartados 
+        # para manter a pureza dos datasets de vitória/derrota.
             
         games_played += 1
         elapsed_time = time.time() - start_time
-        # O print agora mostra qual processo terminou o jogo
-        print(f"[Processo {id_processo}] Jogo {games_played} concluído. Tempo: {elapsed_time/3600:.2f}/{horas_limite:.2f}h")
+        print(f"[Processo {id_processo}] Jogo {games_played} concluído. Tempo: {elapsed_time/3600:.2f}/{horas_limite:.2f}h | Resultado: {board.state}")
 
-    print(f"\n[Processo {id_processo}] Concluído! Arquivo salvo em: {caminho_arquivo}")
-
+    print(f"\n[Processo {id_processo}] Concluído!")
 
 # 2. A função principal que gerencia o paralelismo de forma dinâmica
 def gerar_datasets_paralelos(horas=7, num_processos=7):
@@ -550,4 +570,4 @@ if __name__ == '__main__':
     multiprocessing.set_start_method('fork', force=True) 
     
     # 3. Chama a função principal informando a duração (horas) e a quantidade de processos (7)
-    gerar_datasets_paralelos(horas=7, num_processos=7)
+    gerar_datasets_paralelos(horas=17, num_processos=7)
